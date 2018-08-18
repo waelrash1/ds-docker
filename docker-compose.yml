@@ -1,0 +1,22 @@
+version: '3'
+services:
+  webserver:
+    container_name: "app"
+    build: .
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      ["8080:80"]
+  
+  db:
+    image: mysql
+    container_name: "dbase"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ./db-volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'hardeight'
+volumes: 
+  app:
+  db-volume:
